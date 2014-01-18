@@ -105,8 +105,7 @@
 						<input type="password" name='j_password' class="form-control" placeholder="Password" data-rule-required="true" data-msg-required="Please enter your password." />
 					</div>
 				</div>
-				<!-- /Input Fields -->
-
+				
 				<!-- Form Actions -->
 				<div class="form-actions">
 					

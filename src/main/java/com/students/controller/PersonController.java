@@ -7,10 +7,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
-    
+import com.admin.auth.Admin;
+
+  
 @Controller   
 public class PersonController {  
     
@@ -18,7 +21,8 @@ public class PersonController {
     private PersonService personService;
      
     @RequestMapping(value = "/person", method = RequestMethod.GET)  
-    public String getPersonList(ModelMap model) {  
+    public String getPersonList(ModelMap model,@ModelAttribute("user") Admin user) {  
+    	
         model.addAttribute("personList", personService.listPerson());  
         return "output";  
     }  

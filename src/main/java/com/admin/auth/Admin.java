@@ -1,24 +1,35 @@
 package com.admin.auth;
 
+import org.springframework.context.annotation.Scope;
+
+
 public class Admin {
 
-	public String admin_id;
-	public String pass;
-	public String getAdmin_id() {
-		return admin_id;
+	public String school_name;
+	public String password;
+	public String school_id;
+	public String getSchool_name() {
+		return school_name;
 	}
-	public void setAdmin_id(String admin_id) {
-		this.admin_id = admin_id;
+	public void setSchool_name(String school_name) {
+		this.school_name = school_name;
 	}
-	public String getPass() {
-		return pass;
+	public String getPassword() {
+		return password;
 	}
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getSchool_id() {
+		return school_id;
+	}
+	public void setSchool_id(String school_id) {
+		this.school_id = school_id;
 	}
 	@Override
 	public String toString() {
-		return "Admin [admin_id=" + admin_id + ", pass=" + pass + "]";
+		return "Admin [school_name=" + school_name + ", password=" + password
+				+ ", school_id=" + school_id + "]";
 	}
 	
 }

@@ -8,6 +8,7 @@
 	<http auto-config="true">
 		<intercept-url pattern="/dashboard*" access="ROLE_USER" />
 		<intercept-url pattern="/students/*" access="ROLE_USER" />
+		<intercept-url pattern="/buses/*" access="ROLE_USER" />
 		<intercept-url pattern="/person/*" access="ROLE_USER" />
 		<intercept-url pattern="/person" access="ROLE_USER" />
 		<form-login login-page="/login" default-target-url="/dashboard"

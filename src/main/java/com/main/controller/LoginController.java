@@ -3,22 +3,25 @@ package com.main.controller;
 import java.security.Principal;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
- 
+import com.admin.auth.Admin;
+
 @Controller
 public class LoginController {
  
 	
 	//private static final Logger logger = Logger.getLogger(LoginController.class);
 	@RequestMapping(value="/dashboard", method = RequestMethod.GET)
-	public String printWelcome(ModelMap model, Principal principal ) {
- 
+	public String printWelcome(ModelMap model, Principal principal,HttpServletRequest request ) {
+		String school_name=(String) request.getSession().getAttribute("school_name");
+		System.out.println("school name --> "+school_name);
 		//String name = principal.getName();
 		model.addAttribute("date", new Date());
 		
@@ -54,8 +57,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logout(ModelMap model) {
- 
+	public String logout() {
+		
 		return "login";
  
 	}
