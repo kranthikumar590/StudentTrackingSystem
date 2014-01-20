@@ -20,9 +20,7 @@ public class LoginController {
 	//private static final Logger logger = Logger.getLogger(LoginController.class);
 	@RequestMapping(value="/dashboard", method = RequestMethod.GET)
 	public String printWelcome(ModelMap model, Principal principal,HttpServletRequest request ) {
-		String school_name=(String) request.getSession().getAttribute("school_name");
-		System.out.println("school name --> "+school_name);
-		//String name = principal.getName();
+		
 		model.addAttribute("date", new Date());
 		
 		return "dashboard";
@@ -63,4 +61,10 @@ public class LoginController {
  
 	}
 	
+	@RequestMapping(value="/404", method = RequestMethod.GET)
+	public String accessdenied(ModelMap model, Principal principal) {
+		
+			model.addAttribute("date", new Date());
+			return "/404";
+	}
 }

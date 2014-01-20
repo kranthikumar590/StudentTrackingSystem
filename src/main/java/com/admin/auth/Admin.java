@@ -8,6 +8,7 @@ public class Admin {
 	public String school_name;
 	public String password;
 	public String school_id;
+	public String access;
 	public String getSchool_name() {
 		return school_name;
 	}
@@ -26,10 +27,17 @@ public class Admin {
 	public void setSchool_id(String school_id) {
 		this.school_id = school_id;
 	}
+	public String getAccess() {
+		return access;
+	}
+	public void setAccess(String access) {
+		this.access = access;
+	}
 	@Override
 	public String toString() {
 		return "Admin [school_name=" + school_name + ", password=" + password
-				+ ", school_id=" + school_id + "]";
+				+ ", school_id=" + school_id + ", access=" + access + "]";
 	}
+	
 	
 }

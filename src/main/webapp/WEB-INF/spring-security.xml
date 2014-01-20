@@ -6,16 +6,17 @@
 	http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
 
 	<http auto-config="true">
-		<intercept-url pattern="/dashboard*" access="ROLE_USER" />
-		<intercept-url pattern="/students/*" access="ROLE_USER" />
-		<intercept-url pattern="/buses/*" access="ROLE_USER" />
-		<intercept-url pattern="/person/*" access="ROLE_USER" />
-		<intercept-url pattern="/person" access="ROLE_USER" />
+		<intercept-url pattern="/dashboard*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/junior/buses/*" access="ROLE_JUNIORADMIN" />
+		<intercept-url pattern="/junior/*" access="ROLE_JUNIORADMIN" />
+		<intercept-url pattern="/junior/students/*" access="ROLE_JUNIORADMIN" />
+		<intercept-url pattern="/senior/*" access="ROLE_SENIORADMIN" />
 		<form-login login-page="/login" default-target-url="/dashboard"
 			authentication-failure-url="/loginfailed" />
 		<logout logout-success-url="/logout" />
+		<access-denied-handler error-page="/404"/>
 	</http>
-
+	
 	<authentication-manager>
 		
 		<authentication-provider ref="customAuthenticationProvider"/>

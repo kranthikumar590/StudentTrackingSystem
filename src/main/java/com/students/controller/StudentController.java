@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class StudentController {
 
-	@RequestMapping(value="/students/list", method = RequestMethod.GET)
+	@RequestMapping(value="/junior/students/list", method = RequestMethod.GET)
 	public String login(ModelMap model) {
 		model.addAttribute("date", new Date());
 		
-		return "/students/students_list";
+		return "/junior_admin/students/students_list";
  
 	}
 	
