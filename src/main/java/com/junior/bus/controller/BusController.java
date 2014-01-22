@@ -1,4 +1,4 @@
-package com.bus.controller;
+package com.junior.bus.controller;
 
 import java.util.Date;
 

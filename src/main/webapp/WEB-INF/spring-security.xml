@@ -11,15 +11,22 @@
 		<intercept-url pattern="/junior/*" access="ROLE_JUNIORADMIN" />
 		<intercept-url pattern="/junior/students/*" access="ROLE_JUNIORADMIN" />
 		<intercept-url pattern="/senior/*" access="ROLE_SENIORADMIN" />
-		<form-login login-page="/login" default-target-url="/dashboard"
-			authentication-failure-url="/loginfailed" />
+		
+		<form-login login-page="/login" 
+			
+			authentication-failure-url="/loginfailed"
+			authentication-success-handler-ref="myAuthenticationSuccessHandler" 
+		 />
+		  
 		<logout logout-success-url="/logout" />
 		<access-denied-handler error-page="/404"/>
+		
 	</http>
 	
 	<authentication-manager>
 		
-		<authentication-provider ref="customAuthenticationProvider"/>
+		<authentication-provider ref="customAuthenticationProvider" />
+		
 	</authentication-manager>
 	
 	    

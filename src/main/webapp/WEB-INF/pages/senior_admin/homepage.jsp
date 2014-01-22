@@ -13,8 +13,34 @@
 
 	<!-- Include JS files -->
 	<%@ include file="jsp-includes/js_files.jsp" %>
-
 	
+	<script type="text/javascript">
+	
+		$(document).ready(function(){
+			$("#showSingleSchoolDetails").click(function(){
+				
+				alert("hi");
+			});
+		});
+		
+		
+		function madeAjaxCall(){
+			$.ajax({
+				type: "post",
+				url: "http://localhost:8080/SpringExamples/employee/add.htm",
+				cache: false,				
+				data:'school_id=' + $("#firstName").val() + "&lastName=" + $("#lastName").val() + "&email=" + $("#email").val(),
+				success: function(response){
+					$('#result').html("");
+					var obj = JSON.parse(response);
+					$('#result').html("First Name:- " + obj.firstName +"</br>Last Name:- " + obj.lastName  + "</br>Email:- " + obj.email);
+				},
+				error: function(){						
+					alert('Error while request..');
+				}
+			});
+		}
+	 </script>
 </head>
 
 <body>
@@ -84,13 +110,7 @@
 					<div class="col-sm-4 col-md-1">
 					
 					</div>
-					<div class="col-md-4" style="width:240px;" align="right">
-										
-						<a data-toggle="modal" href="#myModal"  class="btn btn-icon input-block-level" id="add_new_rfid">
-								<i class="icon-group">&nbsp;&nbsp;&nbsp;New School registration</i>
-						</a>
-						
-					</div>
+					
 					
 					<div class="col-sm-6 col-md-3">
 							<div class="statbox widget box box-shadow">
@@ -99,7 +119,7 @@
 										<i class="icon-user"></i>
 									</div>
 									<div class="title">Total Schools</div>
-									<div class="value">14</div>
+									<div class="value">${schoolsListLength-1}</div>
 									
 								</div>
 								
@@ -133,91 +153,49 @@
 											
 											<th>School Name</th>
 											<th>Admin Name</th>
-											<th>Number of buses</th>
-											<th>No of Students</th>
 											<th>Status</th>
 											<th>option</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											
-											<td>
-												<a href="#">St John Paul</a>
-											</td>
-											<td>Abid</td>
-											<td>10</td>
-											<td>200</td>
-											<td><span class="label label-success">Approved</span></td>
-											<td>
-												<a href="#">
-													<button class="btn btn-sm">
-														Edit &nbsp;<i class=icon-edit></i>
-													</button>
-												</a>
-												<a data-toggle="modal" href="#myModal1" class="btn btn-sm">
-													Delete &nbsp;<i class=icol-delete></i>
-												</a>
-											</td>
-										</tr>
-										<tr>
-											
-											<td>
-												<a href="#">St John Paul</a>
-											</td>
-											<td>Abid</td>
-											<td>10</td>
-											<td>200</td>
-											<td><span class="label label-success">Approved</span></td>
-											<td>
-												<a href="#">
-													<button class="btn btn-sm">
-														Edit &nbsp;<i class=icon-edit></i>
-													</button>
-												</a>
-												<a data-toggle="modal" href="#myModal1" class="btn btn-sm">
-													Delete &nbsp;<i class=icol-delete></i>
-												</a>
-											</td>
-										</tr><tr>
-											
-											<td>
-												<a href="#">St John Paul</a>
-											</td>
-											<td>Abid</td>
-											<td>10</td>
-											<td>200</td>
-											<td><span class="label label-success">Approved</span></td>
-											<td>
-												<a href="#">
-													<button class="btn btn-sm">
-														Edit &nbsp;<i class=icon-edit></i>
-													</button>
-												</a>
-												<a data-toggle="modal" href="#myModal1" class="btn btn-sm">
-													Delete &nbsp;<i class=icol-delete></i>
-												</a>
-											</td>
-										</tr><tr>
-											
-											<td>
-												<a href="#">St John Paul</a>
-											</td>
-											<td>Abid</td>
-											<td>10</td>
-											<td>200</td>
-											<td><span class="label label-success">Approved</span></td>
-											<td>
-												<a href="#">
-													<button class="btn btn-sm">
-														Edit &nbsp;<i class=icon-edit></i>
-													</button>
-												</a>
-												<a data-toggle="modal" href="#myModal1" class="btn btn-sm">
-													Delete &nbsp;<i class=icol-delete></i>
-												</a>
-											</td>
-										</tr>
+										
+										<c:forEach var="school" items="${schoolsList}">
+											<c:if test="${school.role == 'ROLE_JUNIORADMIN' }">
+									                <tr>
+											                <td>
+											                	<a data-toggle="modal" href="#myModal1" id="showSingleSchoolDetails">
+											                		${school.school_name}
+											                	</a>
+											                	<input type="hidden" id="school_id" value="${school.school_id}">
+											                </td>
+											                <td>${school.admin_name}</td>
+											                
+											               	<td>
+											                	<c:set var = "access" value="${school.access}"/>  
+											                	
+											                	<c:if test="${access == true}">
+											                	
+											                		<span class="label label-success">Approved</span>
+											                	</c:if>
+											                	<c:if test="${access == false}">
+											                	
+											                		<span class="label label-danger"> Not Approved</span>
+											                	</c:if>
+											              	</td>
+											                <td>
+																<a href="#">
+																	<button class="btn btn-sm">
+																		Edit &nbsp;<i class=icon-edit></i>
+																	</button>
+																</a>
+																<a data-toggle="modal" href="#myModal1" class="btn btn-sm">
+																	Delete &nbsp;<i class=icol-delete></i>
+																</a>
+															</td>
+                							 		  </tr>
+									        </c:if>
+           									 
+								        </c:forEach>
 									</tbody>
 								</table>
 							</div>
@@ -240,16 +218,142 @@
 						<h4 class="modal-title">New School Registration</h4>
 					</div>
 					<div class="modal-body">
-							One fine body&hellip;
+						<!--=== Page Content ===-->
+				<div class="row">
+					<!--=== Validation Example 1 ===-->
+					<div class="col-md-12">
+						<div class="widget box">
+							<div class="widget-header">
+								<h4><i class="icon-reorder"></i>Registration Form</h4>
+							</div>
+							<div class="widget-content">
+								<form class="form-horizontal row-border" id="validate-1" action="newSchoolRegister" method="post">
+									<div class="form-group">
+										<label class="col-md-3 control-label">School Name <span class="required">*</span></label>
+										<div class="col-md-9">
+											<input type="text" name="school_name" class="form-control required">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Admin Name <span class="required">*</span></label>
+										<div class="col-md-9">
+											<input type="text" name="admin_name" class="form-control required">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Number of Buses <span class="required">*</span></label>
+										<div class="col-md-9">
+											<input type="text" name="no_buses" class="form-control required digits" min="0" value="0">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Number of Students <span class="required">*</span></label>
+										<div class="col-md-9">
+											<input type="text" name="no_students" class="form-control required digits" min="0" value="0">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Email <span class="required">*</span></label>
+										<div class="col-md-9">
+											<input type="text" name="email" class="form-control required email">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Phone Number <span class="required">*</span></label>
+										<div class="col-md-9">
+											<input type="text" name="phone_no" class="form-control required digits" rangelength="5,15">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Address <span class="required">*</span></label>
+										<div class="col-md-9">
+											<textarea  name="address" class="form-control required"></textarea>
+											
+										</div>
+									</div>
+									<div class="form-actions">
+										<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+										
+										<input type="submit" value="Register" class="btn btn-primary pull-right">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- /Validation Example 1 -->
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
 					</div>
+					</div>
+					
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 		<!-- end of Modal dialog -->
 		
+		
+		<!-- Modal dialog for School Information -->
+		<div class="modal fade" id="myModal1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" >&times;</button>
+						<h4 class="modal-title">School Information</h4>
+					</div>
+					<div class="modal-body">
+						<!--=== Page Content ===-->
+				<div class="row">
+					<!--=== Validation Example 1 ===-->
+					<div class="col-md-12">
+						<div class="widget box">
+							<div class="widget-header">
+								<h4><i class="icon-reorder"></i>School Name <span class="required">:</span> </h4>
+							</div>
+							<div class="widget-content">
+								<form class="form-horizontal row-border" id="validate-1" action="#">
+									<div class="form-group">
+										<label class="col-md-3 control-label">School Name <span class="required">:</span></label>
+										
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Admin Name <span class="required">:</span></label>
+										
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Number of Buses <span class="required">:</span></label>
+										
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Number of Students <span class="required">:</span></label>
+										
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Email <span class="required">:</span></label>
+										
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Phone Number <span class="required">:</span></label>
+										
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label">Address <span class="required">:</span></label>
+										
+									</div>
+									<div class="form-actions">
+										<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+										
+										
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- /Validation Example 1 -->
+					</div>
+					</div>
+					</div>
+					
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+		<!-- end of Modal dialog -->
 </body>
 </html>

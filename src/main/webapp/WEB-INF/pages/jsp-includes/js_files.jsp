@@ -1,5 +1,5 @@
 <!--=== JavaScript ===-->
-
+	
 	<script type="text/javascript" src="<c:url value="/resources/assets/js/libs/jquery-1.10.2.min.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js" />" ></script>
 

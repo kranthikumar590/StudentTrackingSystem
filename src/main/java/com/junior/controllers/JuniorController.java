@@ -1,8 +1,7 @@
-package com.senior.controllers;
+package com.junior.controllers;
 
-import java.security.Principal;
 import java.util.Date;
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,34 +12,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.admin.auth.Admin;
 import com.admin.auth.AdminService;
-
 @Controller
-public class HomePage {
-	static Logger log = Logger.getLogger(HomePage.class.getName());
+public class JuniorController {
 	@Autowired
     private AdminService adminService;
-	@RequestMapping(value="/senior/homepage", method = RequestMethod.GET)
-	public String seniorHomepage(ModelMap model, Principal principal) {
+	//private static final Logger logger = Logger.getLogger(LoginController.class);
+		@RequestMapping(value="/junior/homepage", method = RequestMethod.GET)
+		public String homepage(ModelMap model) {
+			
 			model.addAttribute("date", new Date());
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	        String name = auth.getName(); //get logged in username
-	        //String pass=(String) auth.getCredentials();
-	        //System.out.println(name);
-	        //System.out.println(pass);
+	        String pass=(String) auth.getCredentials();
+	   
+	        System.out.println(name);
+	        System.out.println(pass);
 	        String admin_name=null;
+	     
 	        try{
 	        	Admin admin=adminService.getAdminDetails(name);
 	        	admin_name=admin.getAdmin_name();
 	            model.addAttribute("admin_name", admin_name);
-	            
 	         }
 	        catch(NullPointerException e){
 	        	
-	        	log.info("User Name [ "+name+"  ] doesnot exists....");
+	        	System.out.println("User Name [ "+name+"  ] doesnot exists....");
 	        }
-	        model.addAttribute("schoolsList", adminService.listSchools());
-	        model.addAttribute("schoolsListLength", adminService.listSchools().size());  
-			return "/senior_admin/homepage";
-	}
-	
+	        
+			return "/junior_admin/homepage";
+	 
+		}
 }

@@ -80,9 +80,10 @@
 
 	<!-- Demo JS -->
 	<script type="text/javascript" src="<c:url value="/resources/assets/js/custom.js " />"></script>
+	<script type="text/javascript" src="<c:url value="/resources/assets/js/demo/form_validation.js" /> "></script>
 	<script type="text/javascript" src="<c:url value="/resources/assets/js/demo/pages_calendar.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/assets/js/demo/charts/chart_filled_blue.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/assets/js/demo/charts/chart_simple.js" />"></script>
-	<script type="text/javascript" src="<c:url value="/resources/assets/js/demo/form_validation.js" /> "></script>
+	
 	
 	

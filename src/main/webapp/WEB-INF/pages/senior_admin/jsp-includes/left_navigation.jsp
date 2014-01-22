@@ -2,12 +2,17 @@
 <!--=== Navigation ===-->
 				<ul id="nav">
 					<li class="current">
-						<a href="/StudentTrackingSystem/dashboard">
+						<a href="/StudentTrackingSystem/senior/homepage">
 							<i class="icon-dashboard"></i>
 							Dashboard
 						</a>
 					</li>
-					
+					<li>
+						<a href="/StudentTrackingSystem/senior/addschool">
+							<i class="icon-group"></i>
+							Add New School
+						</a>
+					</li>
 					<li>
 						<a href="/StudentTrackingSystem/">
 							<i class="icol-ui-text-field-password"></i>

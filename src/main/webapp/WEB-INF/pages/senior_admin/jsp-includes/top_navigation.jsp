@@ -37,7 +37,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<!--<img alt="" src="assets/img/avatar1_small.jpg" />-->
 						<i class="icon-male"></i>
-						<span class="username">John Doe</span>
+						<span class="username">${admin_name}</span>
 						<i class="icon-caret-down small"></i>
 					</a>
 					<ul class="dropdown-menu">

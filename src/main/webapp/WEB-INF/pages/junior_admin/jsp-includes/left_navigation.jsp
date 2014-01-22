@@ -2,7 +2,7 @@
 <!--=== Navigation ===-->
 				<ul id="nav">
 					<li class="current">
-						<a href="/StudentTrackingSystem/dashboard">
+						<a href="/StudentTrackingSystem/junior/homepage">
 							<i class="icon-dashboard"></i>
 							Dashboard
 						</a>
